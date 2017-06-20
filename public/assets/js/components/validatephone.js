@@ -1,6 +1,6 @@
 'use strict';
 
-const Carouselyape = (update) =>{
+const Validatephone = (update) =>{
   const container        = $('<div class="container"></div>');
   const row              = $('<div class="row"></div>');
   const carouselSlider   = $('<div class=" center col m12" data-indicators="true"></div>');
