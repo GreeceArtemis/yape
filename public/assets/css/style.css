@@ -1,0 +1,47 @@
+
+.bullet-red{
+  color:#f64552;
+}
+.bullet-gray{
+  color:#f8f8f8;
+}
+.background-yellow{
+  background-color:  #fbd43b;
+}
+.color-gray-dark{
+  color:#212121;
+}
+.color-gray{
+  color:#8f8f8f;
+}
+.color-term{
+  color:#00c3a3;
+}
+.color-number{
+  color:#49233b;
+}
+.color-morado-light{
+  color: #451e36;
+}
+.color-morado-dark{
+  color: #38052a;
+}
+.carousel .indicators .indicator-item.active {
+  background-color:#f64552;
+}
+.carousel .indicators .indicator-item{
+  background-color:#f8f8f8;
+}
+
+.img-carousel{
+  padding-top: 20%;
+  width: 60%;
+  height: 51%;
+  display: inline-block;
+}
+.img-carousel img{
+  width: 100%;
+}
+.carousel-slider{
+  height: 35em !important;
+}
