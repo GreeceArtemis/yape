@@ -9,12 +9,15 @@ const Carouselyape = (update) =>{
   const imgItem1         = $('<img src="assets/img/icons/icon-people.png" alt="icon-people">');
   const titleItem1       = $('<h2>Para comenzar validemos tu numero</h2>');
   const descriptionItem1 = $('<p class="">recibiras un SMS <br> quieras,sin usar efectivo</p>');
-    const btnContinuar     = $('<a class="btn col s10 offset-s1 background-yellow waves-effect center white-text darken-text-2">Registrarme</a>');
+  const btnContinuar     = $('<a class="btn col s10 offset-s1 background-yellow waves-effect center white-text darken-text-2">Registrarme</a>');
+
+  const input        = $('<input  placeholder="numero">');
+
   carouselItem1.append(imgCarousel1);
   imgCarousel1.append(imgItem1);
   carouselItem1.append(titleItem1);
   carouselItem1.append(descriptionItem1);
-
+carouselItem1.append(input);
   carouselSlider.append(carouselItem1);
   row.append(carouselSlider);
   row.append(btnContinuar);
