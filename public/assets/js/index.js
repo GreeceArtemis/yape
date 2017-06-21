@@ -5,20 +5,19 @@ const render = (root) => {
   const wrapper = $('<div class="wrapper"></div>');
   if (state.selectedScreen == null) {
     wrapper.append(Carouselyape(_ => render(root)));
-
-
-  } else {
-
+  }else if (state.selectedScreen =="codigoCelular") {
     wrapper.append(Validatephone(_ => render(root)));
-  
-  }
-  root.append(wrapper);
 
+  }
+
+
+  root.append(wrapper);
 }
 
 const state = {
   screen: null,
-  selectedScreen: null
+  selectedScreen: null,
+  user:null
 };
 
 $( _ => {

@@ -59,6 +59,11 @@
   width: 21%;
   position: absolute;
 }
-.form-validate-phone input{
-    text-align: center !important;
+.form-validate-code span img {
+    width: 6%;
+    position: absolute;
+}
+.form-validate-phone input,
+.form-validate-code input{
+  text-align: center !important;
 }
