@@ -33,49 +33,63 @@ const Validatephone = (update) =>{
     first:'false',
     secon:"false"
   }
-  inputPhone.keypress (function(event){
-    const codigoNum = event.which;
-    console.log(codigoNum);
-
-    if(codigoNum>=48 && codigoNum<=57&& this.value.length<9){
+  const ConfirmPhone = (validateDates) =>{
+      if(validateDates.first=='true'&& validateDates.second=='true'){
+        btnContinuar.removeClass('disabled');
+      }
+      else{
         btnContinuar.addClass('disabled');
+      }
+  }
+
+  inputPhone.keydown (function(event){
+    const codigoNum = event.which;
+    if((inputPhone.val().length)>=8){
+      if(checkbox.prop('checked')){
+          validateDates.first="true";
+          validateDates.second="true";
+            ConfirmPhone(validateDates);
+        } else {
+            validateDates.second="false";
+          }
+      }else {
+            validateDates.first="false";
+            }
+      ConfirmPhone(validateDates);
+    if(codigoNum == 8){//borrar
+        validateDates.second="false";
+        validateDates.first="false";
+        ConfirmPhone(validateDates);
+    }
+
+    if(codigoNum>=48 && codigoNum<=57&& this.value.length<9 || codigoNum==8|| codigoNum==116 ){
+        validateDates.first="false";
       return true;
     }
     else {
+      //validateDates.first="false";
       return false;
     }
-
   });
+
   checkbox.on('click',(e) =>{
-    if(inputPhone.val().length==9){
-      validateDates.first="true";
       if(checkbox.prop('checked')){
-        console.log(checkbox.prop('checked'));
-        validateDates.second="true";
-        if(validateDates.first=='true'&&validateDates.second=='true'){
-          btnContinuar.removeClass('disabled');
-        }
-        else{
-          alert('noes');
-        }
-      }else{
-        validateDates.second="false";
-        btnContinuar.addClass('disabled');
-      }
-      console.log(validateDates.second);
-    }
-
-
-
+        if(inputPhone.val().length==9){
+          validateDates.first="true";
+          validateDates.second="true";
+        } else {
+            validateDates.first="false";
+          }
+      } else {
+            validateDates.second="false";
+            }
+      ConfirmPhone(validateDates);
   });
-
-
 
 btnContinuar.on('click',(e) =>{
   e.preventDefault();
   const inputOk=inputPhone.val();
   const checkOk=checkbox.val();
-
   $.post('api/registerNumber',{
     phone:inputOk,
     terms:checkOk
@@ -87,10 +101,6 @@ btnContinuar.on('click',(e) =>{
 
 });
 
-
-
-  //console.log(inputOk);
-//console.log(checkOk);
 
   return container;
 }
