@@ -8,10 +8,12 @@ const render = (root) => {
 
 
   } else {
-    wrapper.append(Validatephone(_ => render(root)));
 
+    wrapper.append(Validatephone(_ => render(root)));
+  
   }
   root.append(wrapper);
+
 }
 
 const state = {
@@ -24,5 +26,6 @@ $( _ => {
   const root = $('.root');
   render(root);
   $('.carousel.carousel-slider').carousel({fullWidth: true});
+
 
 });
