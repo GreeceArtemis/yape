@@ -37,7 +37,7 @@ const Validateuser = () =>{
   row.append(divText);
   row.append(divValidate);
   row.append(btnContinuar);
-  btnContinuar.addClass('disabled');
+  //btnContinuar.addClass('disabled');
 
 
   inputName.keydown (function(event){
