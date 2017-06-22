@@ -12,8 +12,8 @@ const Validateuser = () =>{
   const pInput2          = $('<p></p>');
   const pInput3          = $('<p></p>');
   const inputName        = $('<input class="number-phone" id="number-phone" type="text" class="validate" placeholder="Nombre"/>');
-  const inputEmail       = $('<input class="number-phone" id="number-phone" type="text" class="validate" placeholder="correo@ejemplo.com"/>');
-  const inputPassword    = $('<input class="number-phone" id="number-phone" type="text" class="validate" placeholder="Ingresa clave de 6 digitos"/>');
+  const inputEmail       = $('<input class="number-email" id="number-email" type="text" class="validate" placeholder="correo@ejemplo.com"/>');
+  const inputPassword    = $('<input class="number-password" id="number-password" type="text" class="validate" placeholder="Ingresa clave de 6 digitos"/>');
   const span1            = $('<span><img class="form-validate-code" src="assets/img/icons/user.png"></span>');
   const span2            = $('<span><img class="form-validate-code" src="assets/img/icons/message-gray.png"></span>');
   const span3            = $('<span><img class="form-validate-code" src="assets/img/icons/lock.png"></span>');
@@ -59,7 +59,7 @@ const Validateuser = () =>{
 
     }
 
-    if((codigoNum>=97 && codigoNum<=122)&&||(codigoNum>=65 && codigoNum<=90)||codigoNum==39 || codigoNum==32 || this.value.length<30 || codigoNum==8|| codigoNum==116 ){
+    if((codigoNum>=97 && codigoNum<=122)||(codigoNum>=65 && codigoNum<=90)||codigoNum==39 || codigoNum==32 || this.value.length<30 || codigoNum==8|| codigoNum==116 ){
       return true;
     }
     else {
@@ -75,7 +75,7 @@ const Validateuser = () =>{
     $.post('api/createUser',{
       phone:phoneOk,
       name:nameOk,
-      email:emailOK,
+      email:emailOk,
       password:passwordOk
     },(response)=>{
   //    state.user = {"code":response.data.code,"phone":response.data.phone};//creando las propiedades de mi ususario a partir de la respiesta del JSON
@@ -83,8 +83,8 @@ const Validateuser = () =>{
   //    console.log(state.user.phone);
       alert(response.message);
       state.selectedScreen="creandoUsuario";
-      container.empty();
-      container.append(Bienyape ());
+      row.empty();
+      row.append(Bienyape ());
     },'JSON');
   });
 
