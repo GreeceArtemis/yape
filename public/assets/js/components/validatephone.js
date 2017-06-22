@@ -115,9 +115,11 @@ const Validatecode = () =>{
   const divValidate      = $('<div class="form-validate-code col s12 m9 padding-bottom"></div>');
   const pInput           = $('<p></p>');
   const pCheckbox        = $('<p></p>');
-  const pReloj         = $('<p for="filled-in-box">Reintentar en <span><img src="assets/img/icons/clock.png"></span>       '+ '       seg'+'</p>');
+  const pReloj           = $('<p class="text">Reintentar en <span class="text-reloj"><img src="assets/img/icons/clock.png"></span>       '+ '       seg'+'</p>');
   const inputPhone       = $('<input class="number-phone" id="number-phone" type="text" class="validate" placeholder="- - - - -"/>');
   const span             = $('<span><img class="form-validate-code" src="assets/img/icons/lock.png"></span>');
+  const spanCuenta       = $('<span class="cuenta-regresiva"></span>');
+  pReloj.append(spanCuenta);
   pCheckbox.append(pReloj);
   pInput.append(span);
   pInput.append(inputPhone);
@@ -141,23 +143,25 @@ $.post('api/resendCode',{
 
 */
 
-  let time=10; //timepo total en segundos
-  function CuentaRegresiva()
-  {
-      pReloj.innerHTML = time+" segundos";
-      if(time==0)
-      {
-          alert("cambio clave")
-      }else{
-          time-=1;// Restamos un segundo al tiempo restante
-          /* Ejecutamos nuevamente la función al pasar 1000 milisegundos (1 segundo) */
-          setTimeout("CuentaRegresiva()",1000);
-      }
+  var time=10; //timepo total en segundos
+
+  const CuentaRegresiva = ()=>{
+    console.log('emoipeza');
+    spanCuenta.html(time +" segundos");
+    if(time==0)
+    {
+        alert("cambio clave")
+    }else{
+      console.log(time);
+        time-=1;// Restamos un segundo al tiempo restante
+        /* Ejecutamos nuevamente la función al pasar 1000 milisegundos (1 segundo) */
+        setTimeout(CuentaRegresiva(),8000);
+    }
+
   }
 
-  const cuenta =CuentaRegresiva;
-
   inputPhone.keydown (function(event){
+    CuentaRegresiva();
     const codigoNum = event.which;
     if((inputPhone.val().length)<=6){
       const codeForReview=inputPhone.val();
