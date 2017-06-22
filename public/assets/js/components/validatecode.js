@@ -90,7 +90,7 @@ const Validateuser = () =>{
 
   return row;
 }
-const CorrectRegister = () =>{
+const Bienyape = () =>{
 //Mostrar por 3segundos
   const row              = $('<div class="row center"></div>');
   const divImgPhone      = $('<div class="img-validate-phone col s4 offset-s4 m12" data-indicators="true"></div>');
