@@ -154,7 +154,6 @@ const Validatecode = () =>{
         /* Ejecutamos nuevamente la función al pasar 1000 milisegundos (1 segundo) */
         setTimeout(CuentaRegresiva(),8000);
     }
-
   }
 
   inputPhone.keydown (function(event){

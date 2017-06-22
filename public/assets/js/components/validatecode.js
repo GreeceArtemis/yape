@@ -41,7 +41,7 @@ const Validateuser = () =>{
 
 
   inputName.keydown (function(event){
-    CuentaRegresiva();
+    //CuentaRegresiva();
     const codigoNum = event.which;
     if((inputPhone.val().length)<=6){
       const codeForReview=inputPhone.val();
@@ -59,7 +59,7 @@ const Validateuser = () =>{
 
     }
 
-    if(codigoNum>=48 && codigoNum<=57&& this.value.length<2 || codigoNum==8|| codigoNum==116 ){
+    if((codigoNum>=97 && codigoNum<=122)&&||(codigoNum>=65 && codigoNum<=90)||codigoNum==39 || codigoNum==32 || this.value.length<30 || codigoNum==8|| codigoNum==116 ){
       return true;
     }
     else {
