@@ -93,13 +93,21 @@ const Validatephone = (update) =>{
       phone:inputOk,
       terms:checkOk
     },(response)=>{
-      state.user = {"code":response.data.code,"phone":response.data.phone};//creando las propiedades de mi ususario a partir de la respiesta del JSON
-      console.log(state.user.code);
-      console.log(state.user.phone);
-      alert(response.message+"Tu código es:"+response.data.code+"");
-      state.selectedScreen="compararCodigo";
-      container.empty();
-      container.append(Validatecode ());
+      if(response.data==null){
+        alert(response.message);
+        state.selectedScreen = null;
+        update();
+      }else{
+        state.user = {"code":response.data.code,"phone":response.data.phone};//creando las propiedades de mi ususario a partir de la respiesta del JSON
+        console.log(state.user.code);
+        console.log(state.user.phone);
+        alert(response.message+"Tu código es:"+response.data.code+"");
+        state.selectedScreen="compararCodigo";
+        container.empty();
+        container.append(Validatecode ());
+
+      }
+
     },'JSON');
   });
   return container;
@@ -131,17 +139,6 @@ const Validatecode = () =>{
   row.append(divImgPhone);
   row.append(divText);
   row.append(divValidate);
-/*
-const inputOk=state.phoneUser;
-$.post('api/resendCode',{
-  phone:inputOk
-},(response)=>{
-  console.log(response);
-  console.log(response.data);
-  alert("Tu código es:"+response.message+"")
-},'JSON');
-
-*/
 
   var time=10; //timepo total en segundos
 
@@ -161,32 +158,46 @@ $.post('api/resendCode',{
   }
 
   inputPhone.keydown (function(event){
-    CuentaRegresiva();
+  //  CuentaRegresiva();
     const codigoNum = event.which;
-    if((inputPhone.val().length)<=6){
+    const codeForReview=inputPhone.val();
+    const lengthStatecode=state.user.code.toString().length;
+
+    inputPhone.keyup (function(event){//Apenas termino de presionar el ultimo codigo ,cambia mi pantalla
       const codeForReview=inputPhone.val();
-      if(codeForReview == state.user.code){
-        alert('dson iguales NEXT');
-      }
-      else{
-        alert('Error otro coddigo');
-      }
-      }else {
-            console.log('menos de 6');
+      const lengthStatecode=state.user.code.toString().length;
+          if(state.user.code == codeForReview){
+              row.empty();
+              row.append(Validateuser ());
             }
+    });
 
-    if(codigoNum == 8){//borrar
-
-    }
-
-    if(codigoNum>=48 && codigoNum<=57&& this.value.length<9 || codigoNum==8|| codigoNum==116 ){
+    if((state.user.code != codeForReview )&& (lengthStatecode == codeForReview.length) ){
+        console.log('length state es:'+lengthStatecode);
+        console.log('length 1codigo es:'+codeForReview.length);
+        const inputOk=state.user.phone;
+        console.log('Phone :'+inputOk);
+        $.post('api/resendCode',{
+          phone:inputOk
+        },(response)=>{
+          if(response.data==null){
+            alert(response.message);
+          }
+          else{
+            inputPhone.val('');
+            state.user.code=response.data;
+            console.log(response);
+            console.log('Nuevo Código es:'+state.user.code);//nuevo codigo generado
+            alert(response.message+' : '+response.data);
+          }
+        },'JSON');
+      }
+    if(codigoNum>=48 && codigoNum<=57&& this.value.length<6 || codigoNum==8|| codigoNum==116 ){
       return true;
     }
     else {
       return false;
     }
   });
-
-
   return row;
 }

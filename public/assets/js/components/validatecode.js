@@ -23,10 +23,10 @@ const Validateuser = () =>{
   pInput3.append(span3);
   pInput3.append(inputPassword);
   pInput3.append(span4);
-  pInput2.append(inputEmail);
   pInput2.append(span2);
-  pInput1.append(inputName);
+  pInput2.append(inputEmail);
   pInput1.append(span1);
+  pInput1.append(inputName);
   divValidate.append(pInput1);
   divValidate.append(pInput2);
   divValidate.append(pInput3);
@@ -90,7 +90,7 @@ const Validateuser = () =>{
 
   return row;
 }
-const Validateuser = () =>{
+const CorrectRegister = () =>{
 //Mostrar por 3segundos
   const row              = $('<div class="row center"></div>');
   const divImgPhone      = $('<div class="img-validate-phone col s4 offset-s4 m12" data-indicators="true"></div>');
