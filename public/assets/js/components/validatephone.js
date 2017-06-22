@@ -93,19 +93,19 @@ const Validatephone = (update) =>{
       phone:inputOk,
       terms:checkOk
     },(response)=>{
-      if(response.data==null){
+      if(response.data==null || response.success== false){
         alert(response.message);
-        state.selectedScreen = null;
-        update();
+        inputPhone.val('');
+        validateDates.first="false";
+        validateDates.second="false";
       }else{
         state.user = {"code":response.data.code,"phone":response.data.phone};//creando las propiedades de mi ususario a partir de la respiesta del JSON
         console.log(state.user.code);
         console.log(state.user.phone);
-        alert(response.message+"Tu código es:"+response.data.code+"");
+        alert(response.message+" : "+response.data.code+"");
         state.selectedScreen="compararCodigo";
         container.empty();
         container.append(Validatecode ());
-
       }
 
     },'JSON');
