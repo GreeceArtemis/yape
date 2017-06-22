@@ -94,6 +94,8 @@ const Validatephone = (update) =>{
       terms:checkOk
     },(response)=>{
       state.user = {"code":response.data.code,"phone":response.data.phone};//creando las propiedades de mi ususario a partir de la respiesta del JSON
+      console.log(state.user.code);
+      console.log(state.user.phone);
       alert(response.message+"Tu código es:"+response.data.code+"");
       state.selectedScreen="compararCodigo";
       container.empty();
@@ -103,9 +105,7 @@ const Validatephone = (update) =>{
   return container;
 }
 const Validatecode = () =>{
-//setTimeout(function(){ alert("Hello"); }, 5000);
 
-//  const codeOriginal=state.user.codeValidate;
   const row              = $('<div class="row center"></div>');
   const divImgPhone      = $('<div class="img-validate-phone col s4 offset-s4 m12" data-indicators="true"></div>');
   const imgPhone         = $('<img src="assets/img/icons/message.png" alt="icon-phone">');
@@ -115,10 +115,10 @@ const Validatecode = () =>{
   const divValidate      = $('<div class="form-validate-code col s12 m9 padding-bottom"></div>');
   const pInput           = $('<p></p>');
   const pCheckbox        = $('<p></p>');
-  const checkbox         = $('<label for="filled-in-box">Reintentar en <span><img src="assets/img/icons/clock.png"></span>       '+ '       seg'+'</label>');
+  const pReloj         = $('<p for="filled-in-box">Reintentar en <span><img src="assets/img/icons/clock.png"></span>       '+ '       seg'+'</p>');
   const inputPhone       = $('<input class="number-phone" id="number-phone" type="text" class="validate" placeholder="- - - - -"/>');
   const span             = $('<span><img class="form-validate-code" src="assets/img/icons/lock.png"></span>');
-  pCheckbox.append(checkbox);
+  pCheckbox.append(pReloj);
   pInput.append(span);
   pInput.append(inputPhone);
   divValidate.append(pInput);
@@ -140,10 +140,48 @@ $.post('api/resendCode',{
 },'JSON');
 
 */
-    console.log(state.user);
 
-console.log(state.user.phone);
+  let time=10; //timepo total en segundos
+  function CuentaRegresiva()
+  {
+      pReloj.innerHTML = time+" segundos";
+      if(time==0)
+      {
+          alert("cambio clave")
+      }else{
+          time-=1;// Restamos un segundo al tiempo restante
+          /* Ejecutamos nuevamente la función al pasar 1000 milisegundos (1 segundo) */
+          setTimeout("CuentaRegresiva()",1000);
+      }
+  }
 
+  const cuenta =CuentaRegresiva;
+
+  inputPhone.keydown (function(event){
+    const codigoNum = event.which;
+    if((inputPhone.val().length)<=6){
+      const codeForReview=inputPhone.val();
+      if(codeForReview == state.user.code){
+        alert('dson iguales NEXT');
+      }
+      else{
+        alert('Error otro coddigo');
+      }
+      }else {
+            console.log('menos de 6');
+            }
+
+    if(codigoNum == 8){//borrar
+
+    }
+
+    if(codigoNum>=48 && codigoNum<=57&& this.value.length<9 || codigoNum==8|| codigoNum==116 ){
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
 
 
   return row;
